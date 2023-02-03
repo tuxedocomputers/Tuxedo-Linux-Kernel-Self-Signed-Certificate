@@ -18,7 +18,7 @@ $ sha512sum TUXEDO\ Computers\ GmbH\ Secure\ Boot\ Signing.crt
 ```
 $ sudo mokutil --import TUXEDO\ Computers\ GmbH\ Secure\ Boot\ Signing.crt --timeout -1
 ```
-(`--timeout -1` makes sure that you are not skipping the mok manager by accidet next boot)
+(`--timeout -1` makes sure that you are not skipping the mok manager by accident next boot)
 - Provide sudo password
 - Provide one time password for mokutil
 - Repead one time password to rule out typing errors
