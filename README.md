@@ -10,8 +10,8 @@ However we do still sign our Kernel with a self-signed certificate. So after man
 2. Download `TUXEDO_Computers_GmbH_Secure_Boot_Signing.crt`
 3. Make sure the download is correct and not corrupted
 ```
-$ sha512sum TUXEDO\ Computers\ GmbH\ Secure\ Boot\ Signing.crt 
-13887887159754640c69b4e270c7ccd89f6e06bae9f8addc91708cf93ce3fd565f712b8c7acaf0444c5da30aae2dfe0941b71c228a6bdd20facd28529c0aaa62  TUXEDO Computers GmbH Secure Boot Signing.crt
+$ sha512sum TUXEDO_Computers_GmbH_Secure_Boot_Signing.crt
+13887887159754640c69b4e270c7ccd89f6e06bae9f8addc91708cf93ce3fd565f712b8c7acaf0444c5da30aae2dfe0941b71c228a6bdd20facd28529c0aaa62  TUXEDO_Computers_GmbH_Secure_Boot_Signing.crt
 ```
 4. Import certificate as a Machine Owner Key (MOK)
 ```
@@ -30,10 +30,11 @@ sudo mokutil --import /var/lib/shim-signed/mok/MOK.der
 sudo mokutil --timeout -1
 ```
 11. Reboot
-12. MOKManager should pop up before Grub -> Use the menu to verify the imported keys (if you close the MOKManager by accident without having the key verified, you must run the mokutil commands again before reboot, see 4.-11.)
-13. Reboot to UEFI menu and activate Secure Boot
-14. If you close the MOKManager by accident without having the key verified, you must run the mokutil commands again before reboot
+12. MOKManager should pop up before Grub
+13. Select "Enroll MOK" and follow instructions on screen to verify the imported keys
+14. If you close the MOKManager by accident without having the key verified, you must run the mokutil commands again before reboot, see 4.-11.
+15. Reboot to UEFI menu and activate Secure Boot
 
 ## Troubleshooting
 
-On TUXEDO OS and *buntus, if `/var/lib/shim-signed/mok/MOK.der` does not exist on your system you can generate it with `sudo update-secureboot-policy --new-key` (you still need to enroll it afterwards as described in 9.). You might need to reinstall all DKMS packages after that for the respective modules to be signed with the new key.
+On TUXEDO OS and *buntus, if `/var/lib/shim-signed/mok/MOK.der` does not exist on your system you can generate it with `sudo update-secureboot-policy --new-key` (you still need to enroll it afterwards as described in 9.). You need to reinstall all DKMS packages after that for the respective modules to be signed with the new key.
